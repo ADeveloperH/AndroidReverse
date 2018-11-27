@@ -3,7 +3,7 @@
 //
 #include <jni.h>
 #ifdef __cplusplus
-extern "C" {
+extern "C"
 #endif
 
 JNIEXPORT jstring JNICALL Java_com_adeveloperh_androidreversestudy_jni_JNIUtils_getStrFromJNI
