@@ -1,6 +1,9 @@
 # 设置构建本地库所需的最小版本
 cmake_minimum_required(VERSION 3.4.1)
 
+#设置生成的so动态库最后输出的路径
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI})
+
 # 编译出一个动态库 HelloCPP，源文件只有 src/main/cpp/HelloCPP.cpp
 add_library( # 设置库的名称，即 SO 文件的名称
              helloJNI

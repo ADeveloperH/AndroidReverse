@@ -7,7 +7,10 @@
 
 #define LOG_TAG "System.out.c"
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
-extern "C"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 JNIEXPORT void JNICALL Java_com_adeveloperh_androidreversestudy_jni_JNIUtils_printPersonMsg
         (JNIEnv *env, jclass clazz, jobject person) {
     jclass personClass = env->GetObjectClass(person);

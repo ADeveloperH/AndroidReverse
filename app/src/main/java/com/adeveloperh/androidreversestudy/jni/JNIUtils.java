@@ -11,9 +11,6 @@ public class JNIUtils {
 
     private static int count;
 
-    static {
-        System.loadLibrary("helloJNI");
-    }
     public static native void sayHello();
 
     public static native String getStrFromJNI();

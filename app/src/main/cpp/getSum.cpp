@@ -3,7 +3,10 @@
 //
 
 #include <jni.h>
-extern "C"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 JNIEXPORT jint JNICALL Java_com_adeveloperh_androidreversestudy_jni_JNIUtils_getSum
         (JNIEnv *env, jclass clazz, jint a, jint b) {

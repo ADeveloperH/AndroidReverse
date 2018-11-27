@@ -8,7 +8,9 @@ import com.adeveloperh.androidreversestudy.R;
 import com.adeveloperh.androidreversestudy.jni.bean.Person;
 
 public class HelloJNIActivity extends AppCompatActivity {
-
+    static {
+        System.loadLibrary("helloJNI");
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,5 +27,9 @@ public class HelloJNIActivity extends AppCompatActivity {
         JNIUtils.printPersonMsg(person);
 
         JNIUtils.invokeJavaStaticMethod();
+
+        Person invokeMethodPerson = new Person();
+        invokeMethodPerson.invokeJavaMethod();
+        Log.d("hj", "HelloJNIActivity.onCreate: person:" + person.toString());
     }
 }
