@@ -20,6 +20,7 @@ add_library( # 设置库的名称，即 SO 文件的名称
              src/main/cpp/getSum.cpp
              src/main/cpp/printperson.cpp
              src/main/cpp/invokeJavaMethod.cpp
+             src/main/cpp/book/hello.cpp
 
              )
 
