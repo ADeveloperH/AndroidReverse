@@ -24,5 +24,6 @@ public class ParseAndroidManifest {
         ParseChunkUtils.parseXmlContent(resource);
         System.out.println("============================================================== 完成解析 XMLContent Chunk =================================================================== ");
 
+        ParseChunkUtils.writeFormatXmlToFile();
     }
 }

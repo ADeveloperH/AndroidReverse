@@ -2,6 +2,7 @@ package com.adeveloperh.androidreversestudy.jni.book.xml;
 
 import com.adeveloperh.androidreversestudy.jni.book.Utils;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -398,5 +399,21 @@ public class ParseChunkUtils {
 
     public static String getStringContent(int index) {
         return stringContentList.get(index);
+    }
+
+    public static void writeFormatXmlToFile(){
+        FileWriter fw = null;
+        try{
+            fw = new FileWriter("D:\\Repositories\\AndroidReverseStudy\\app\\src\\main\\test\\AndroidManifest_format.xml");
+            fw.write(xmlSB.toString());
+        }catch(Exception e){
+            System.out.println("write format xml file error:"+e.toString());
+        }finally{
+            try{
+                fw.close();
+            }catch(Exception e){
+                System.out.println("close file error:"+e.toString());
+            }
+        }
     }
 }
