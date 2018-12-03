@@ -1,5 +1,7 @@
 package com.adeveloperh.androidreversestudy.jni.book.elf;
 
+import com.adeveloperh.androidreversestudy.jni.book.Utils;
+
 /**
  * @author huangjian
  * @create 2018/12/1

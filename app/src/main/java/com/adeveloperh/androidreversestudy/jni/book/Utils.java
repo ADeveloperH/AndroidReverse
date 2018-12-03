@@ -1,8 +1,11 @@
-package com.adeveloperh.androidreversestudy.jni.book.elf;
+package com.adeveloperh.androidreversestudy.jni.book;
+
+import android.text.TextUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
 /**
  * @author huangjian
@@ -13,14 +16,15 @@ public class Utils {
 
 
     /**
-     * 输出 byte 数组的 16 进制字符串
+     * 逆序 输出 byte 数组的 16 进制字符串
+     * byte[] 从 0-len ，0 是低位，len 是高位，如果代表的是 size 逆序就能从高位到低位，好看
      *
      * @param bytes
      * @return
      */
     public static String byte2HexString(byte[] bytes) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < bytes.length; i++) {
+        for (int i = bytes.length - 1; i >= 0; i--) {
             String hex = Integer.toHexString(bytes[i]);
             if (hex.length() < 2) {
                 stringBuilder.append("0").append(hex);
@@ -114,5 +118,24 @@ public class Utils {
             result = result | (res[i] & 0xFF) << 8 * i;
         }
         return result;
+    }
+
+
+    public static String filterStringNull(String string) {
+        if (string == null || string.length() == 0) {
+            return string;
+        }
+        byte[] bytes = string.getBytes();
+        ArrayList<Byte> newByte = new ArrayList<>();
+        for (int i = 0; i < bytes.length; i++) {
+            if (bytes[i] != 0) {
+                newByte.add(bytes[i]);
+            }
+        }
+        byte[] newByteArr = new byte[newByte.size()];
+        for (int i = 0; i < newByte.size(); i++) {
+            newByteArr[i] = newByte.get(i);
+        }
+        return new String(newByteArr);
     }
 }
