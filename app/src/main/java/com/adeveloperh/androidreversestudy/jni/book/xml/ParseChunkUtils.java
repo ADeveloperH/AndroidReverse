@@ -87,24 +87,24 @@ public class ParseChunkUtils {
          * 这里的格式是：偏移值开始的两个字节是字符串的长度，接着是字符串的内容，后面跟着两个字符串的结束符 00
          */
 //        byte[] firstStringSizeByte = Utils.copyBytes(stringChunkByte, 0, 2);
-////        // Utils.byteArr2Int(firstStringSizeByte) 代表字符串的长度，字符串中一个字符占用 2 个字节
-////        int firstStringSize = Utils.byteArr2Int(firstStringSizeByte) * 2;
-////        System.out.println("String Chunk Size：" + firstStringSize);
-////        byte[] firstStringContentByte = Utils.copyBytes(stringChunkByte, 2, firstStringSize + 2);
-////        String firstStringContent = new String(firstStringContentByte);
-////        firstStringContent = Utils.filterStringNull(firstStringContent);
-////        stringContentList.add(firstStringContent);
-////        System.out.println("str :" + firstStringContent);
-////
-////        int endStringIndex = 2 + firstStringSize + 2;
-////        while (stringContentList.size() < stringCount) {
-////            int stringSize = Utils.byteArr2Int(Utils.copyBytes(stringChunkByte, endStringIndex, 2)) * 2;
-////            String string = new String(Utils.copyBytes(stringChunkByte, endStringIndex + 2, stringSize + 2));
-////            string = Utils.filterStringNull(string);
-////            System.out.println("str :" + string);
-////            stringContentList.add(string);
-////            endStringIndex += (2 + stringSize + 2);
-////        }
+//        // Utils.byteArr2Int(firstStringSizeByte) 代表字符串的长度，字符串中一个字符占用 2 个字节
+//        int firstStringSize = Utils.byteArr2Int(firstStringSizeByte) * 2;
+//        System.out.println("String Chunk Size：" + firstStringSize);
+//        byte[] firstStringContentByte = Utils.copyBytes(stringChunkByte, 2, firstStringSize + 2);
+//        String firstStringContent = new String(firstStringContentByte);
+//        firstStringContent = Utils.filterStringNull(firstStringContent);
+//        stringContentList.add(firstStringContent);
+//        System.out.println("str :" + firstStringContent);
+//
+//        int endStringIndex = 2 + firstStringSize + 2;
+//        while (stringContentList.size() < stringCount) {
+//            int stringSize = Utils.byteArr2Int(Utils.copyBytes(stringChunkByte, endStringIndex, 2)) * 2;
+//            String string = new String(Utils.copyBytes(stringChunkByte, endStringIndex + 2, stringSize + 2));
+//            string = Utils.filterStringNull(string);
+//            System.out.println("str :" + string);
+//            stringContentList.add(string);
+//            endStringIndex += (2 + stringSize + 2);
+//        }
 
 
         /**
