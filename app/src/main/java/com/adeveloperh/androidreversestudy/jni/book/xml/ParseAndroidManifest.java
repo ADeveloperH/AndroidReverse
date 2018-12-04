@@ -9,7 +9,7 @@ import com.adeveloperh.androidreversestudy.jni.book.Utils;
  */
 public class ParseAndroidManifest {
     public static void main(String[] args) {
-        byte[] resource = Utils.readFile("D:\\Repositories\\AndroidReverseStudy\\app\\src\\main\\test\\AndroidManifest.xml");
+        byte[] resource = Utils.readFile("D:\\Repositories\\AndroidReverseStudy\\app\\src\\main\\test\\activity_set_gesturelock_explain.xml");
 
         System.out.println("============================================================== 开始解析 Header =================================================================== ");
         ParseChunkUtils.parseXmlHeader(resource);
