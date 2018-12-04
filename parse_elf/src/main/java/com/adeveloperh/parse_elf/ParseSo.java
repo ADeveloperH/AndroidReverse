@@ -1,6 +1,7 @@
-package com.adeveloperh.androidreversestudy.jni.book.elf;
+package com.adeveloperh.parse_elf;
 
-import com.adeveloperh.androidreversestudy.jni.book.Utils;
+
+import com.adeveloperh.base.Utils;
 
 /**
  * @author huangjian

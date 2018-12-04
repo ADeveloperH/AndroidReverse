@@ -1,6 +1,7 @@
 package com.adeveloperh.androidreversestudy.jni.book.xml;
 
-import com.adeveloperh.androidreversestudy.jni.book.Utils;
+
+import com.adeveloperh.base.Utils;
 
 /**
  * @author huangjian

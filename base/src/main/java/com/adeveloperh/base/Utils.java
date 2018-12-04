@@ -1,6 +1,4 @@
-package com.adeveloperh.androidreversestudy.jni.book;
-
-import android.text.TextUtils;
+package com.adeveloperh.base;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
