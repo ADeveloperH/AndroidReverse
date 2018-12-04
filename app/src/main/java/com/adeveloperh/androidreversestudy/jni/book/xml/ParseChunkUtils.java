@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class ParseChunkUtils {
 
+    public static boolean isAndroidManifestXml = true;
+
     public static StringBuilder xmlSB = new StringBuilder();
 
     public static int stringChunkOffset;
@@ -80,58 +82,59 @@ public class ParseChunkUtils {
         System.out.println("String Chunk Start:" + stringContentStart);
 
         byte[] stringChunkByte = Utils.copyBytes(res, stringContentStart, chunkSize);
+        if (isAndroidManifestXml) {
 
-        /**
-         * 在解析字符串的时候有个问题，就是编码：UTF-8 和 UTF-16,如果是 UTF-8 的话是以 00 结尾的，如果是 UTF-16 的话以 00 00 结尾的
-         * 此处代码是用来解析 AndroidManifest.xml 文件的
-         * 这里的格式是：偏移值开始的两个字节是字符串的长度，接着是字符串的内容，后面跟着两个字符串的结束符 00
-         */
-//        byte[] firstStringSizeByte = Utils.copyBytes(stringChunkByte, 0, 2);
-//        // Utils.byteArr2Int(firstStringSizeByte) 代表字符串的长度，字符串中一个字符占用 2 个字节
-//        int firstStringSize = Utils.byteArr2Int(firstStringSizeByte) * 2;
-//        System.out.println("String Chunk Size：" + firstStringSize);
-//        byte[] firstStringContentByte = Utils.copyBytes(stringChunkByte, 2, firstStringSize + 2);
-//        String firstStringContent = new String(firstStringContentByte);
-//        firstStringContent = Utils.filterStringNull(firstStringContent);
-//        stringContentList.add(firstStringContent);
-//        System.out.println("str :" + firstStringContent);
-//
-//        int endStringIndex = 2 + firstStringSize + 2;
-//        while (stringContentList.size() < stringCount) {
-//            int stringSize = Utils.byteArr2Int(Utils.copyBytes(stringChunkByte, endStringIndex, 2)) * 2;
-//            String string = new String(Utils.copyBytes(stringChunkByte, endStringIndex + 2, stringSize + 2));
-//            string = Utils.filterStringNull(string);
-//            System.out.println("str :" + string);
-//            stringContentList.add(string);
-//            endStringIndex += (2 + stringSize + 2);
-//        }
+            /**
+             * 在解析字符串的时候有个问题，就是编码：UTF-8 和 UTF-16,如果是 UTF-8 的话是以 00 结尾的，如果是 UTF-16 的话以 00 00 结尾的
+             * 此处代码是用来解析 AndroidManifest.xml 文件的
+             * 这里的格式是：偏移值开始的两个字节是字符串的长度，接着是字符串的内容，后面跟着两个字符串的结束符 00
+             */
+            byte[] firstStringSizeByte = Utils.copyBytes(stringChunkByte, 0, 2);
+            // Utils.byteArr2Int(firstStringSizeByte) 代表字符串的长度，字符串中一个字符占用 2 个字节
+            int firstStringSize = Utils.byteArr2Int(firstStringSizeByte) * 2;
+            System.out.println("String Chunk Size：" + firstStringSize);
+            byte[] firstStringContentByte = Utils.copyBytes(stringChunkByte, 2, firstStringSize + 2);
+            String firstStringContent = new String(firstStringContentByte);
+            firstStringContent = Utils.filterStringNull(firstStringContent);
+            stringContentList.add(firstStringContent);
+            System.out.println("str :" + firstStringContent);
 
-
-        /**
-         * 此处的代码是用来解析资源文件xml的
-         */
-        int stringStart = 0;
-        int index = 0;
-        while (index < stringCount) {
-            byte[] stringSizeByte = Utils.copyBytes(stringChunkByte, stringStart, 2);
-            int stringSize = (stringSizeByte[1] & 0x7F);
-            if (stringSize != 0) {
-                //这里注意是UTF-8编码的
-                String val = "";
-                try {
-                    val = new String(Utils.copyBytes(stringChunkByte, stringStart + 2, stringSize), "utf-8");
-                } catch (Exception e) {
-                    System.out.println("string encode error:" + e.toString());
-                }
-                stringContentList.add(val);
-            } else {
-                stringContentList.add("");
+            int endStringIndex = 2 + firstStringSize + 2;
+            while (stringContentList.size() < stringCount) {
+                int stringSize = Utils.byteArr2Int(Utils.copyBytes(stringChunkByte, endStringIndex, 2)) * 2;
+                String string = new String(Utils.copyBytes(stringChunkByte, endStringIndex + 2, stringSize + 2));
+                string = Utils.filterStringNull(string);
+                System.out.println("str :" + string);
+                stringContentList.add(string);
+                endStringIndex += (2 + stringSize + 2);
             }
-            stringStart += (stringSize + 3);
-            index++;
-        }
-        for (String str : stringContentList) {
-            System.out.println("str:" + str);
+        } else {
+            /**
+             * 此处的代码是用来解析资源文件xml的
+             */
+            int stringStart = 0;
+            int index = 0;
+            while (index < stringCount) {
+                byte[] stringSizeByte = Utils.copyBytes(stringChunkByte, stringStart, 2);
+                int stringSize = (stringSizeByte[1] & 0x7F);
+                if (stringSize != 0) {
+                    //这里注意是UTF-8编码的
+                    String val = "";
+                    try {
+                        val = new String(Utils.copyBytes(stringChunkByte, stringStart + 2, stringSize), "utf-8");
+                    } catch (Exception e) {
+                        System.out.println("string encode error:" + e.toString());
+                    }
+                    stringContentList.add(val);
+                } else {
+                    stringContentList.add("");
+                }
+                stringStart += (stringSize + 3);
+                index++;
+            }
+            for (String str : stringContentList) {
+                System.out.println("str:" + str);
+            }
         }
 
         resourceChunkOffset = stringChunkOffset + chunkSize;
