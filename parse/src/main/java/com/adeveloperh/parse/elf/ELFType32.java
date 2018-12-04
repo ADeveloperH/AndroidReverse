@@ -1,4 +1,4 @@
-package com.adeveloperh.parse_elf;
+package com.adeveloperh.parse.elf;
 
 
 import com.adeveloperh.base.Utils;

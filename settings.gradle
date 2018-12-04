@@ -1,1 +1,1 @@
-include ':app', ':parse_elf', ':base'
+include ':app',':base', ':parse'

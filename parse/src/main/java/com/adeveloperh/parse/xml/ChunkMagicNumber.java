@@ -1,4 +1,4 @@
-package com.adeveloperh.androidreversestudy.jni.book.xml;
+package com.adeveloperh.parse.xml;
 
 /**
  * chunks' magic numbers
